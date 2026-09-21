@@ -1,0 +1,99 @@
+# Registro de Pruebas con CURL - Codigos de Estado HTTP
+# Alumna: Ariana Alegre Micelli
+# Materia: Programacion IV
+
+# ------------------------------------------------------------------------------
+# Caso 1: 200 OK
+# Peticion: Obtener lista de proyectos existentes
+# ------------------------------------------------------------------------------
+curl -X GET http://127.0.0.1:8000/api/projects/ -H "Accept: application/json"
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "name": "Plataforma E-commerce",
+    "description": "Sistema de ventas online",
+    "tasks": [],
+    "created_at": "2026-09-21T18:00:00Z"
+  }
+]
+
+# ------------------------------------------------------------------------------
+# Caso 2: 201 Created
+# Peticion: Crear un nuevo proyecto por POST
+# ------------------------------------------------------------------------------
+curl -X POST http://127.0.0.1:8000/api/projects/ \
+  -H "Content-Type: application/json" \
+  -d '{"name": "App Movil iOS", "description": "Aplicacion nativa"}'
+
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "App Movil iOS",
+  "description": "Aplicacion nativa",
+  "tasks": [],
+  "created_at": "2026-09-21T18:05:00Z"
+}
+
+# ------------------------------------------------------------------------------
+# Caso 3: 204 No Content
+# Peticion: Eliminar un proyecto existente
+# ------------------------------------------------------------------------------
+curl -i -X DELETE http://127.0.0.1:8000/api/projects/2/
+
+HTTP/1.1 204 No Content
+
+# ------------------------------------------------------------------------------
+# Caso 4: 400 Bad Request
+# Peticion: Intentar crear una tarea con fecha en el pasado o violando regla de negocio
+# ------------------------------------------------------------------------------
+curl -i -X POST http://127.0.0.1:8000/api/tasks/ \
+  -H "Content-Type: application/json" \
+  -d '{"project": 1, "title": "Test Ayer", "due_date": "2020-01-01"}'
+
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": true,
+  "detail": {
+    "due_date": [
+      "La fecha limite no puede ser en el pasado."
+    ]
+  }
+}
+
+# ------------------------------------------------------------------------------
+# Caso 5: 404 Not Found
+# Peticion: Consultar un proyecto con ID inexistente
+# ------------------------------------------------------------------------------
+curl -i -X GET http://127.0.0.1:8000/api/projects/9999/ -H "Accept: application/json"
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "error": true,
+  "detail": {
+    "detail": "No encontrado."
+  }
+}
+
+# ------------------------------------------------------------------------------
+# Caso 6: 405 Method Not Allowed
+# Peticion: Enviar DELETE al endpoint de health check que solo acepta GET
+# ------------------------------------------------------------------------------
+curl -i -X DELETE http://127.0.0.1:8000/api/health/
+
+HTTP/1.1 405 Method Not Allowed
+Content-Type: application/json
+
+{
+  "error": true,
+  "detail": "Method \"DELETE\" not allowed."
+}
