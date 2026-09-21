@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "nombre": "Teclado Mecanico",
+        "precio": 45000,
+        "stock": 15
+    },
+    {
+        "id": 2,
+        "nombre": "Mouse Gamer",
+        "precio": 25000,
+        "stock": 30
+    },
+    {
+        "id": 3,
+        "nombre": "Monitor 24 Pulgadas",
+        "precio": 120000,
+        "stock": 8
+    },
+    {
+        "id": 4,
+        "nombre": "Auriculares Bluetooth",
+        "precio": 35000,
+        "stock": 20
+    },
+    {
+        "id": 5,
+        "nombre": "Pad Mouse XL",
+        "precio": 12000,
+        "stock": 50
+    }
+]
