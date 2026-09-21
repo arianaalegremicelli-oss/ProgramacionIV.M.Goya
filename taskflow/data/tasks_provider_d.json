@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Implementar endpoints de recuperacion de password",
+    "priority": "alta",
+    "status": "pendiente"
+  },
+  {
+    "priority": "media",
+    "status": "pendiente"
+  },
+  {
+    "title": "Documentar arquitectura en diagrama C4",
+    "priority": "baja",
+    "status": "en_progreso"
+  }
+]
