@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Configurar linter y formateador",
+    "priority": "baja",
+    "status": "pendiente"
+  },
+  {
+    "title": "Escribir tests unitarios para autenticacion",
+    "priority": "alta",
+    "status": "pendiente"
+  }
+]
